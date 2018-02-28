@@ -4,7 +4,7 @@ import com.erik.sparkproject.domain.Task;
 
 /**
  * 任务管理DAO接口
- * @author Erik
+ * @author hery
  *
  */
 public interface ITaskDAO {

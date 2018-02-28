@@ -5,7 +5,7 @@ import java.util.Properties;
 
 /**
  * 配置管理组件
- * @author Erik
+ * @author hery
  *
  */
 public class ConfigurationManager {

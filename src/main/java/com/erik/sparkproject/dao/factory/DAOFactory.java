@@ -15,7 +15,7 @@ import com.erik.sparkproject.impl.Top10SessionDAOImpl;
 
 /**
  * DAO工厂类
- * @author Erik
+ * @author hery
  *
  */
 public class DAOFactory {

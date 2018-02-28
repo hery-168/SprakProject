@@ -20,7 +20,7 @@ import com.erik.sparkproject.util.StringUtils;
 
 /**
  * 模拟数据程序
- * @author Administrator
+ * @author hery
  *
  */
 public class MockData {
