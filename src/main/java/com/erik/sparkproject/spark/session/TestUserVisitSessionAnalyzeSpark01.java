@@ -21,7 +21,7 @@ public class TestUserVisitSessionAnalyzeSpark01 {
         //构建spark上下文
 
         //首先在Constants.java中设置spark作业相关的常量
-        //String SPARK_APP_NAME = "UserVisitSessionAnalyzeSpark";
+        //String SPARK_APP_NAME = "UserVisitSessionAnalyzeSpark_finish";
         //保存Constants.java配置
         SparkConf conf = new SparkConf()
                 .setAppName(Constants.SPARK_APP_NAME)

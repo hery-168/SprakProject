@@ -1,4 +1,6 @@
 package com.erik.sparkproject.spark.session;
+
+
 import java.util.Iterator;
 
 import org.apache.spark.SparkConf;
@@ -6,6 +8,7 @@ import org.apache.spark.SparkContext;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
+import org.apache.spark.api.java.function.Function;
 import org.apache.spark.api.java.function.PairFunction;
 import org.apache.spark.sql.DataFrame;
 import org.apache.spark.sql.Row;
@@ -22,16 +25,20 @@ import com.erik.sparkproject.test.MockData;
 import com.erik.sparkproject.util.*;
 
 import scala.Tuple2;
+
 /**
- * Created by Administrator on 2018/2/28.
+ *
+ * @author Erik
+ *
  */
-public class TestUserVisitSessionAnalyzeSpark02 {
+public class TestUserVisitSessionAnalyzeSpark03 {
+
     public static void main(String[] args) {
-        args= new String[] {"1"};
+        args = new String[]{"1"};
         //构建spark上下文
 
         //首先在Constants.java中设置spark作业相关的常量
-        //String SPARK_APP_NAME = "UserVisitSessionAnalyzeSpark_finish";
+        //String SPARK_APP_NAME = "TestUserVisitSessionAnalyzeSpark03";
         //保存Constants.java配置
         SparkConf conf = new SparkConf()
                 .setAppName(Constants.SPARK_APP_NAME)
@@ -48,23 +55,37 @@ public class TestUserVisitSessionAnalyzeSpark02 {
 
         //那么就首先得查询出来指定的任务，并获取任务的查询参数
         long taskid = ParamUtils.getTaskIdFromArgs(args);
+
         Task task = taskDAO.findById(taskid);
-        System.out.printf("TaskParam:   "+task.getTaskParam());
-        String json="{'startDate':[{0:'2018-02-27'}],'endDate':[{0:'2018-02-28'}]}";
-        json="{'startDate':'2018-02-27','endDate':'2018-02-28'}";
-//        JSONObject taskParam = JSONObject.parseObject(task.getTaskParam());
-        JSONObject taskParam = JSONObject.parseObject(json);
+        JSONObject taskParam = JSONObject.parseObject(task.getTaskParam());
+
         //如果要进行session粒度的数据聚合，
         //首先要从user_visit_action表中，查询出来指定日期范围内的数据
         JavaRDD<Row> actionRDD = getActionRDDByDateRange(sqlContext, taskParam);
-        actionRDD.count();
+
+        int a=0;
+        for (Row r:actionRDD.collect()) {
+            System.out.println(r.get(1)+"  "+r.get(2)+"  "+r.get(3)+"  "+r.get(4)+"  "+r.get(5)+"  "+r.get(6)+"  "+r.get(7));
+            a++;
+            if(a>=10){
+                break;
+            }
+        }
         //聚合
         //首先，可以将行为数据按照session_id进行groupByKey分组
         //此时的数据粒度就是session粒度了，然后可以将session粒度的数据与用户信息数据惊醒join
         //然后就可以获取到session粒度的数据，同时数据里面还包含了session对应的user信息
+        //到这里为止，获取的数据是<sessionid,(sessionid,searchKeywords,
+        //clickCategoryIds,age,professional,city,sex)>
         JavaPairRDD<String, String> sessionid2AggrInfoRDD =
                 aggregateBySession(sqlContext, actionRDD);
 
+
+        //接着，就要针对session粒度的聚合数据，按照使用者指定的筛选参数进行数据过滤
+        //相当于我们自己编写的算子，是要访问外面的任务参数对象的
+        //匿名内部类（算子函数），访问外部对象，是要给外部对象使用final修饰的
+        JavaPairRDD<String, String> filteredSessionid2AggrInfoRDD =
+                filterSession(sessionid2AggrInfoRDD, taskParam);
         //关闭spark上下文
         sc.close();
 
@@ -72,7 +93,7 @@ public class TestUserVisitSessionAnalyzeSpark02 {
 
     /**
      * 获取SQLContext
-     * 如果在本地测试环境的话，那么就生成SQLContext对象
+     * 如果在本地测试环境的话，那么久生成SQLC哦那text对象
      *如果在生产环境运行的话，那么就生成HiveContext对象
      * @param sc SparkContext
      * @return SQLContext
@@ -130,12 +151,13 @@ public class TestUserVisitSessionAnalyzeSpark02 {
         String endDate = ParamUtils.getParamExtend(taskParam, Constants.PARAM_END_DATE);
 
         String sql = "select * "
-                + " from user_visit_action"
+                + "from user_visit_action"
                 + " where date>= '" + startDate + "'"
                 + " and date<= '" + endDate + "'";
 
+        System.out.println(sql);
         DataFrame actionDF = sqlContext.sql(sql);
-
+//        actionDF.show();
         return actionDF.javaRDD();
     }
 
@@ -197,7 +219,7 @@ public class TestUserVisitSessionAnalyzeSpark02 {
                                 userid = row.getLong(1);
                             }
                             String searchKeyword = row.getString(5);
-                            long clickCategoryId = row.getLong(6);
+                            Long clickCategoryId = row.getLong(6);
 
                             //实际上这里要对数据说明一下
                             //并不是每一行访问行为都有searchKeyword和clickCategoryId两个字段的
@@ -214,11 +236,12 @@ public class TestUserVisitSessionAnalyzeSpark02 {
                                     searchKeywordsBuffer.append(searchKeyword + ",");
                                 }
                             }
-                            if(!clickCategoryIdsBuffer.toString().contains(
-                                    String.valueOf(clickCategoryId))) {
-                                clickCategoryIdsBuffer.append(clickCategoryId + ",");
-                            }
-                        }
+                            if(clickCategoryId != null) {
+                                if(!clickCategoryIdsBuffer.toString().contains(
+                                        String.valueOf(clickCategoryId))) {
+                                    clickCategoryIdsBuffer.append(clickCategoryId + ",");
+                                }
+                            }                       }
 
                         //StringUtils引入的包是import com.erik.sparkproject.util.trimComma;
                         String searchKeywords = StringUtils.trimComma(searchKeywordsBuffer.toString());
@@ -248,6 +271,7 @@ public class TestUserVisitSessionAnalyzeSpark02 {
 
                         return new Tuple2<Long, String>(userid, partAggrInfo);
                     }
+
 
                 });
 
@@ -302,7 +326,102 @@ public class TestUserVisitSessionAnalyzeSpark02 {
                                 + Constants.FIELD_SEX + "=" + sex ;
                         return new Tuple2<String, String>(sessionid, fullAggrInfo);
                     }
+
+
                 });
         return sessionid2FullAggrInfoRDD;
+    }
+
+    /**
+     * 过滤session数据
+     * @param sessionid2AggrInfoRDD
+     * @return
+     */
+    private static JavaPairRDD<String, String> filterSession(
+            JavaPairRDD<String, String> sessionid2AggrInfoRDD,
+            final JSONObject taskParam) {
+        //为了使用后面的ValieUtils,所以，首先将所有的筛选参数拼接成一个连接串
+        String startAge = ParamUtils.getParam(taskParam, Constants.PARAM_END_AGE);
+        String endAge = ParamUtils.getParam(taskParam, Constants.PARAM_END_AGE);
+        String professionals = ParamUtils.getParam(taskParam, Constants.PARAM_PROFESSIONALS);
+        String cities = ParamUtils.getParam(taskParam, Constants.PARAM_CITIES);
+        String sex = ParamUtils.getParam(taskParam, Constants.PARAM_SEX);
+        String keywords = ParamUtils.getParam(taskParam, Constants.PARAM_KEYWORDS);
+        String categoryIds = ParamUtils.getParam(taskParam, Constants.PARAM_CATEGORY_IDS);
+
+        String _parameter = (startAge != null ? Constants.PARAM_START_AGE + "=" + startAge + "|" : "")
+                + (endAge != null ? Constants.PARAM_END_AGE + "=" + endAge + "|" : "")
+                + (professionals != null ? Constants.PARAM_PROFESSIONALS + "=" + professionals + "|" : "")
+                + (cities != null ? Constants.PARAM_CITIES + "=" + cities + "|" : "")
+                + (sex != null ? Constants.PARAM_SEX + "=" + sex + "|" : "")
+                + (keywords != null ? Constants.PARAM_KEYWORDS + "=" + keywords + "|" : "")
+                + (categoryIds != null ? Constants.PARAM_CATEGORY_IDS + "=" + categoryIds : "");
+
+        if (_parameter.endsWith("\\|")) {
+            _parameter = _parameter.substring(0, _parameter.length() - 1);
+        }
+
+        final String parameter = _parameter;
+
+        //根据筛选参数进行过滤
+        JavaPairRDD<String, String> filteredSessionid2AggrInfoRDD = sessionid2AggrInfoRDD.filter(
+
+                new Function<Tuple2<String, String>, Boolean>() {
+
+
+                    private static final long serialVersionUID = 1L;
+
+                    public Boolean call(Tuple2<String, String> tuple) throws Exception {
+                        //首先，从tuple中，获取聚合数据
+                        String aggrInfo = tuple._2;
+
+                        //接着，依次按照筛选条件进行过滤
+                        //按照年龄范围进行过滤（startAge、endAge）
+                        //先在Constants.java中添加常量
+                        //String PARAM_START_AGE = "startAge";
+                        //String PARAM_END_AGE = "endage";
+                        //String PARAM_PROFESSIONALS = "professionals";
+                        //String PARAM_CITIES = "cities";
+                        //String PARAM_SEX = "sex";
+                        //String PARAM_KEYWORDS = "keywords";
+                        //String PARAM_CATEGORY_IDS = "categoryIds";
+                        if(!ValidUtils.between(aggrInfo, Constants.FIELD_AGE,
+                                parameter, Constants.PARAM_START_AGE, Constants.PARAM_END_AGE)) {
+                            return false;
+                        }
+
+                        //按照职业范围进行过滤（professionals）
+                        if(!ValidUtils.in(aggrInfo, Constants.FIELD_PROFESSIONAL,
+                                parameter, Constants.PARAM_PROFESSIONALS)) {
+                            return false;
+                        }
+
+                        //按照城市范围进行过滤（cities）
+                        if(!ValidUtils.in(aggrInfo, Constants.FIELD_CITY,
+                                parameter, Constants.PARAM_CATEGORY_IDS)) {
+                            return false;
+                        }
+
+                        //按照性别过滤
+                        if(!ValidUtils.equal(aggrInfo, Constants.FIELD_SEX,
+                                parameter, Constants.PARAM_SEX)) {
+                            return false;
+                        }
+
+                        //按照搜索词过滤
+                        if(!ValidUtils.in(aggrInfo, Constants.FIELD_SEARCH_KEYWORDS,
+                                parameter, Constants.PARAM_KEYWORDS)) {
+                            return false;
+                        }
+
+                        //按照点击品类id进行搜索
+                        if(!ValidUtils.in(aggrInfo, Constants.FIELD_CLICK_CATEGORY_IDS,
+                                parameter, Constants.PARAM_CATEGORY_IDS)) {
+                            return false;
+                        }
+                        return true;
+                    }
+                });
+        return null;
     }
 }

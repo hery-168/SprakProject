@@ -38,5 +38,14 @@ public class ParamUtils {
 		}
 		return null;
 	}
-	
+	/**
+	 * 从JSON对象中提取参数
+	 * @param jsonObject JSON对象
+	 * @return 参数
+	 */
+	public static String getParamExtend(JSONObject jsonObject, String field) {
+		String value = jsonObject.getString(field);
+
+		return value;
+	}
 }

@@ -20,7 +20,7 @@ public interface Constants {
 	/**
 	 * spark作业相关的常量
 	 */
-	String SPARK_APP_NAME = "UserVisitSessionAnalyzeSpark";
+	String SPARK_APP_NAME = "UserVisitSessionAnalyzeSpark_finish";
 	String FIELD_SESSION_ID = "sessionid";
 	String FIELD_SEARCH_KEYWORDS = "searchKeywords";
 	String FIELD_CLICK_CATEGORY_IDS = "clickCategoryIds";
