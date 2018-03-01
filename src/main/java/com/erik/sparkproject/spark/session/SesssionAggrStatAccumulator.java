@@ -73,7 +73,7 @@ public class SesssionAggrStatAccumulator implements AccumulatorParam<String> {
 
 	/**
 	 * session统计计算逻辑
-	 * @param v1连接串
+	 * @param v1 连接串
 	 * @param v2 范围区间
 	 * @return更新以后的连接串
 	 */
