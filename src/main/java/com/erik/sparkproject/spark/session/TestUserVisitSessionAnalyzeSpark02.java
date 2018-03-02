@@ -57,7 +57,7 @@ public class TestUserVisitSessionAnalyzeSpark02 {
         //如果要进行session粒度的数据聚合，
         //首先要从user_visit_action表中，查询出来指定日期范围内的数据
         JavaRDD<Row> actionRDD = getActionRDDByDateRange(sqlContext, taskParam);
-        actionRDD.count();
+//        actionRDD.count();
         //聚合
         //首先，可以将行为数据按照session_id进行groupByKey分组
         //此时的数据粒度就是session粒度了，然后可以将session粒度的数据与用户信息数据惊醒join
@@ -221,6 +221,7 @@ public class TestUserVisitSessionAnalyzeSpark02 {
                         }
 
                         //StringUtils引入的包是import com.erik.sparkproject.util.trimComma;
+//                        去除两边的逗号
                         String searchKeywords = StringUtils.trimComma(searchKeywordsBuffer.toString());
                         String clickCategoryIds = StringUtils.trimComma(clickCategoryIdsBuffer.toString());
 
@@ -267,6 +268,9 @@ public class TestUserVisitSessionAnalyzeSpark02 {
                 });
 
         //将session粒度聚合数据，与用户信息进行join
+//         JavaPairRDD<Long, Tuple2<String, Row>> Long 类型代表join 的key,也就是userid,
+//        Tuple2<String, Row> 中的String 类型代表userid2PartAggrInfoRDD 这里面的PartAggrInfoRDD，
+//        Row类型代表userid2InfoRDD 这里面的InfoRDD
         JavaPairRDD<Long, Tuple2<String, Row>> userid2FullInfoRDD =
                 userid2PartAggrInfoRDD.join(userid2InfoRDD);
 
@@ -285,6 +289,7 @@ public class TestUserVisitSessionAnalyzeSpark02 {
                         String sessionid = StringUtils.getFieldFromConcatString(
                                 partAggrInfo, "\\|", Constants.FIELD_SESSION_ID);
 
+//                        获取信息
                         int age = userInfoRow.getInt(3);
                         String professional = userInfoRow.getString(4);
                         String city = userInfoRow.getString(5);
