@@ -25,4 +25,14 @@ public class SessinoRandomExtractDAOImpl implements ISessionRandomExtractDAO {
 		jdbcHelper.executeUpdate(sql, params);
 	}
 
+	public static void main(String[] args) {
+		SessinoRandomExtractDAOImpl sss=new SessinoRandomExtractDAOImpl();
+		SessionRandomExtract bean=new SessionRandomExtract();
+		bean.setSessionid("111");
+		bean.setClickCategoryIds("222");
+		bean.setSearchKeywords("只能尴尬发大发打发");
+		bean.setTaskid(2);
+		bean.setStartTime("2017-7-7");
+		sss.insert(bean);
+	}
 }

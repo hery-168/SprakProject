@@ -334,6 +334,7 @@ public class TestUserVisitSessionAnalyzeSpark03 {
 
     /**
      * 过滤session数据
+     * 匿名内部类使用外部参数，是需要用final进行修饰的
      * @param sessionid2AggrInfoRDD
      * @return
      */

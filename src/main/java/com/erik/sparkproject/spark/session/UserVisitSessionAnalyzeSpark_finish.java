@@ -76,7 +76,7 @@ import scala.Tuple2;
 public class UserVisitSessionAnalyzeSpark_finish {
 
 	public static void main(String[] args) {
-		args = new String[]{"2"};
+		args = new String[]{"1"};
 		//构建spark上下文
 		
 		//首先在Constants.java中设置spark作业相关的常量
@@ -99,8 +99,8 @@ public class UserVisitSessionAnalyzeSpark_finish {
 		long taskid = ParamUtils.getTaskIdFromArgs(args);
 		Task task = taskDAO.findById(taskid);
 		JSONObject taskParam = JSONObject.parseObject(task.getTaskParam());
-		System.out.println(taskid);
-		System.out.println(taskParam);
+//		System.out.println(taskid);
+//		System.out.println(taskParam);
 		
 		//如果要进行session粒度的数据聚合，
 		//首先要从user_visit_action表中，查询出来指定日期范围内的数据
