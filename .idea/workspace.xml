@@ -2,29 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dc9000ee-ac8f-423f-985c-7702c25b3448" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/kotlinc.xml" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/erik/sparkproject/impl/SessinoRandomExtractDAOImpl.class" afterPath="$PROJECT_DIR$/target/classes/com/erik/sparkproject/impl/SessinoRandomExtractDAOImpl.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/erik/sparkproject/spark/session/SesssionAggrStatAccumulator.class" afterPath="$PROJECT_DIR$/target/classes/com/erik/sparkproject/spark/session/SesssionAggrStatAccumulator.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/erik/sparkproject/spark/session/TestUserVisitSessionAnalyzeSpark02$2.class" afterPath="$PROJECT_DIR$/target/classes/com/erik/sparkproject/spark/session/TestUserVisitSessionAnalyzeSpark02$2.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/erik/sparkproject/spark/session/TestUserVisitSessionAnalyzeSpark02$3.class" afterPath="$PROJECT_DIR$/target/classes/com/erik/sparkproject/spark/session/TestUserVisitSessionAnalyzeSpark02$3.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/erik/sparkproject/spark/session/TestUserVisitSessionAnalyzeSpark02$4.class" afterPath="$PROJECT_DIR$/target/classes/com/erik/sparkproject/spark/session/TestUserVisitSessionAnalyzeSpark02$4.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/erik/sparkproject/spark/session/TestUserVisitSessionAnalyzeSpark02.class" afterPath="$PROJECT_DIR$/target/classes/com/erik/sparkproject/spark/session/TestUserVisitSessionAnalyzeSpark02.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/erik/sparkproject/spark/session/TestUserVisitSessionAnalyzeSpark03$1.class" afterPath="$PROJECT_DIR$/target/classes/com/erik/sparkproject/spark/session/TestUserVisitSessionAnalyzeSpark03$1.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/erik/sparkproject/spark/session/TestUserVisitSessionAnalyzeSpark03$2.class" afterPath="$PROJECT_DIR$/target/classes/com/erik/sparkproject/spark/session/TestUserVisitSessionAnalyzeSpark03$2.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/erik/sparkproject/spark/session/TestUserVisitSessionAnalyzeSpark03$3.class" afterPath="$PROJECT_DIR$/target/classes/com/erik/sparkproject/spark/session/TestUserVisitSessionAnalyzeSpark03$3.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/erik/sparkproject/spark/session/TestUserVisitSessionAnalyzeSpark03$4.class" afterPath="$PROJECT_DIR$/target/classes/com/erik/sparkproject/spark/session/TestUserVisitSessionAnalyzeSpark03$4.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/erik/sparkproject/spark/session/TestUserVisitSessionAnalyzeSpark03$5.class" afterPath="$PROJECT_DIR$/target/classes/com/erik/sparkproject/spark/session/TestUserVisitSessionAnalyzeSpark03$5.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/erik/sparkproject/spark/session/TestUserVisitSessionAnalyzeSpark03.class" afterPath="$PROJECT_DIR$/target/classes/com/erik/sparkproject/spark/session/TestUserVisitSessionAnalyzeSpark03.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/erik/sparkproject/spark/session/UserVisitSessionAnalyzeSpark_finish.class" afterPath="$PROJECT_DIR$/target/classes/com/erik/sparkproject/spark/session/UserVisitSessionAnalyzeSpark_finish.class" />
-      <change beforePath="$PROJECT_DIR$/target/classes/my.properties" afterPath="$PROJECT_DIR$/target/classes/my.properties" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,81 +14,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="TestUserVisitSessionAnalyzeSpark07.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TestUserVisitSessionAnalyzeSpark07.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/erik/sparkproject/spark/session/TestUserVisitSessionAnalyzeSpark07.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="671" column="23" lean-forward="false" selection-start-line="671" selection-start-column="23" selection-end-line="671" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ISessionRandomExtractDAO.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/erik/sparkproject/dao/ISessionRandomExtractDAO.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="12" column="20" lean-forward="false" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ISessionAggrStatDAO.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/erik/sparkproject/dao/ISessionAggrStatDAO.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SessinoRandomExtractDAOImpl.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/erik/sparkproject/impl/SessinoRandomExtractDAOImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="72">
-              <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="JDBCHelper.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/erik/sparkproject/jdbc/JDBCHelper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="594">
-              <caret line="31" column="26" lean-forward="false" selection-start-line="31" selection-start-column="26" selection-end-line="31" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ConfigurationManager.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/erik/sparkproject/conf/ConfigurationManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="10" column="35" lean-forward="false" selection-start-line="10" selection-start-column="35" selection-end-line="10" selection-end-column="35" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="my.properties" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/my.properties">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="23" lean-forward="false" selection-start-line="0" selection-start-column="23" selection-end-line="0" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Constants.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/com/erik/sparkproject/constant/Constants.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="12" column="37" lean-forward="false" selection-start-line="12" selection-start-column="31" selection-end-line="12" selection-end-column="37" />
+            <state relative-caret-position="270">
+              <caret line="752" column="0" lean-forward="true" selection-start-line="752" selection-start-column="0" selection-end-line="752" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -307,7 +215,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.SessinoRandomExtractDAOImpl">
+  <component name="RunManager" selected="Application.TestUserVisitSessionAnalyzeSpark07">
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="WIDTH" value="400" />
       <option name="HEIGHT" value="300" />
@@ -492,8 +400,8 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.SessinoRandomExtractDAOImpl" />
-        <item index="1" class="java.lang.String" itemvalue="Application.TestUserVisitSessionAnalyzeSpark07" />
+        <item index="0" class="java.lang.String" itemvalue="Application.TestUserVisitSessionAnalyzeSpark07" />
+        <item index="1" class="java.lang.String" itemvalue="Application.SessinoRandomExtractDAOImpl" />
         <item index="2" class="java.lang.String" itemvalue="Application.UserVisitSessionAnalyzeSpark_finish" />
         <item index="3" class="java.lang.String" itemvalue="Application.App" />
         <item index="4" class="java.lang.String" itemvalue="Application.TestUserVisitSessionAnalyzeSpark06" />
@@ -520,27 +428,28 @@
       <updated>1520083907555</updated>
       <workItem from="1520083909057" duration="3458000" />
       <workItem from="1520132039760" duration="17482000" />
-      <workItem from="1520167650493" duration="452000" />
+      <workItem from="1520167650493" duration="1250000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21392000" />
+    <option name="totallyTimeSpent" value="22190000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47775948" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.34266886" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.6589786" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294893" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.67874795" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33937398" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3139183" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -555,7 +464,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24962178" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47775948" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
     </layout>
@@ -681,6 +589,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
           <caret line="61" column="22" lean-forward="false" selection-start-line="61" selection-start-column="22" selection-end-line="61" selection-end-column="22" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -688,6 +597,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="243">
           <caret line="71" column="13" lean-forward="true" selection-start-line="71" selection-start-column="13" selection-end-line="71" selection-end-column="13" />
+          <folding>
+            <element signature="e#14914#17442#0" expanded="false" />
+            <element signature="e#17441#17442#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -695,6 +608,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="341">
           <caret line="112" column="4" lean-forward="false" selection-start-line="112" selection-start-column="4" selection-end-line="112" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -723,6 +637,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
           <caret line="502" column="42" lean-forward="true" selection-start-line="502" selection-start-column="42" selection-end-line="502" selection-end-column="42" />
+          <folding>
+            <element signature="e#8143#8550#0" expanded="false" />
+            <element signature="e#8549#8550#0" expanded="false" />
+            <element signature="e#8953#14808#0" expanded="false" />
+            <element signature="e#14807#14808#0" expanded="false" />
+            <element signature="e#15033#15332#0" expanded="false" />
+            <element signature="e#15331#15332#0" expanded="false" />
+            <element signature="e#15673#17265#0" expanded="false" />
+            <element signature="e#17264#17265#0" expanded="false" />
+            <element signature="e#19168#21696#0" expanded="false" />
+            <element signature="e#21695#21696#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -738,6 +664,17 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="98">
           <caret line="423" column="40" lean-forward="false" selection-start-line="423" selection-start-column="40" selection-end-line="423" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="false" />
+            <element signature="e#5123#5530#0" expanded="false" />
+            <element signature="e#5529#5530#0" expanded="false" />
+            <element signature="e#5936#9672#0" expanded="false" />
+            <element signature="e#9671#9672#0" expanded="false" />
+            <element signature="e#9897#10197#0" expanded="false" />
+            <element signature="e#10196#10197#0" expanded="false" />
+            <element signature="e#10538#11855#0" expanded="false" />
+            <element signature="e#11854#11855#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -787,6 +724,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="33" column="3" lean-forward="true" selection-start-line="33" selection-start-column="3" selection-end-line="33" selection-end-column="3" />
+          <folding>
+            <element signature="e#5325#5732#0" expanded="false" />
+            <element signature="e#5731#5732#0" expanded="false" />
+            <element signature="e#6135#9958#0" expanded="false" />
+            <element signature="e#9957#9958#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -801,6 +744,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="188">
           <caret line="24" column="11" lean-forward="true" selection-start-line="24" selection-start-column="11" selection-end-line="24" selection-end-column="11" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -851,30 +795,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/erik/sparkproject/dao/ISessionRandomExtractDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="12" column="20" lean-forward="false" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/erik/sparkproject/dao/ISessionAggrStatDAO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/erik/sparkproject/spark/session/TestUserVisitSessionAnalyzeSpark07.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="671" column="23" lean-forward="false" selection-start-line="671" selection-start-column="23" selection-end-line="671" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/erik/sparkproject/constant/Constants.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
@@ -917,8 +837,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/erik/sparkproject/impl/SessinoRandomExtractDAOImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+        <state relative-caret-position="207">
+          <caret line="31" column="40" lean-forward="false" selection-start-line="31" selection-start-column="40" selection-end-line="31" selection-end-column="40" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/erik/sparkproject/dao/ISessionAggrStatDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="91">
+          <caret line="9" column="17" lean-forward="false" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/erik/sparkproject/dao/ISessionRandomExtractDAO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="91">
+          <caret line="12" column="20" lean-forward="false" selection-start-line="12" selection-start-column="20" selection-end-line="12" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/erik/sparkproject/spark/session/TestUserVisitSessionAnalyzeSpark07.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="752" column="0" lean-forward="true" selection-start-line="752" selection-start-column="0" selection-end-line="752" selection-end-column="0" />
           <folding />
         </state>
       </provider>
