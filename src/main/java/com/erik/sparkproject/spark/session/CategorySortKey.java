@@ -14,7 +14,7 @@ import scala.math.Ordered;
  * 依次使用三个次数进行比较，如果某一个相等，那么就比较下一个
  * 
  * 自定义的二次排序key，必须要实现serializable接口，表明是可以序列化 的，否则会报错
- * @author Erik
+ * @author yongheng
  *
  */
 public class CategorySortKey implements Ordered<CategorySortKey>, Serializable{
