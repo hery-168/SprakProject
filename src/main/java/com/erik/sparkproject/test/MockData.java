@@ -66,10 +66,10 @@ public class MockData {
 					if("search".equals(action)) {
 						searchKeyword = searchKeywords[random.nextInt(10)];   
 					} else if("click".equals(action)) {
-						clickCategoryId = Long.valueOf(String.valueOf(random.nextInt(100)));    
+						clickCategoryId = Long.valueOf(String.valueOf(random.nextInt(30)));
 						clickProductId = Long.valueOf(String.valueOf(random.nextInt(100)));  
 					} else if("order".equals(action)) {
-						orderCategoryIds = String.valueOf(random.nextInt(100));  
+						orderCategoryIds = String.valueOf(random.nextInt(100));
 						orderProductIds = String.valueOf(random.nextInt(100));
 					} else if("pay".equals(action)) {
 						payCategoryIds = String.valueOf(random.nextInt(100));  

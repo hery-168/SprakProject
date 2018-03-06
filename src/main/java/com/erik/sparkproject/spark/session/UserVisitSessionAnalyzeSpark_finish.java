@@ -272,8 +272,8 @@ public class UserVisitSessionAnalyzeSpark_finish {
 		
 		String sql = "select * "
 				+ "from user_visit_action"
-				+ "where date>='" + startDate + "'"
-				+ "and date<='" + endDate + "'";
+				+ " where date >='" + startDate + "'"
+				+ " and date <='" + endDate + "'";
 		
 		DataFrame actionDF = sqlContext.sql(sql);
 		
@@ -453,7 +453,7 @@ public class UserVisitSessionAnalyzeSpark_finish {
 								+ Constants.FIELD_CLICK_CATEGORY_IDS + "=" + clickCategoryIds + "|"
 								+ Constants.FIELD_VISIT_LENGTH + "=" + visitLength + "|"
 								+ Constants.FIELD_STEP_LENGTH + "=" + stepLength + "|"
-								+ Constants.FIELD_START_TIME + "=" + DateUtils.formatDate(startTime);
+								+ Constants.FIELD_START_TIME + "=" + DateUtils.formatTime(startTime);
 						
 						return new Tuple2<Long, String>(userid, partAggrInfo);
 					}
@@ -702,7 +702,9 @@ public class UserVisitSessionAnalyzeSpark_finish {
 	
 	/**
 	 * 随机抽取session
-	 * @param sessionid2AggrInfo
+	 * @param taskid
+	 * @param sessionid2AggrInfoRDD
+	 * @param sessionid2actionRDD
 	 */
 	private static void randomExtractSession(
 			final long taskid,
@@ -1044,8 +1046,8 @@ public class UserVisitSessionAnalyzeSpark_finish {
 	
 	/**
 	 * 获取Top10热门品类
-	 * @param filteredSessionid2AggrInfoRDD
-	 * @param sessionid2actionRDD
+	 * @param taskid
+	 * @param sessionid2detailRDD
 	 */
 	private static List<Tuple2<CategorySortKey, String>> getTop10Category(
 			long taskid,
@@ -1582,29 +1584,29 @@ public class UserVisitSessionAnalyzeSpark_finish {
 						
 						//将数据写入MySQL表
 						List<Tuple2<String, String>> list = new ArrayList<Tuple2<String, String>>();
-						
+
 						for(String sessionCount : top10Sessions) {
 							if(sessionCount != null) {
 								String sessionid = sessionCount.split(",")[0];
 								long count = Long.valueOf(sessionCount.split(",")[1]);
-								
+
 								//将top10session插入MySQL表
 								Top10Session top10Session = new Top10Session();
 								top10Session.setTaskid(taskid);
 								top10Session.setCategoryid(categoryid);
 								top10Session.setSessionid(sessionid);
 								top10Session.setClickCount(count);
-								
+
 								ITop10SessionDAO top10SessionDAO = DAOFactory.getTop10SessionDAO();
 								top10SessionDAO.insert(top10Session);
-								
+
 								list.add(new Tuple2<String, String>(sessionid, sessionid));
 							}
 						}
-						
+
 						return list;
 					}
-			
+
 		});
 		
 		/**
