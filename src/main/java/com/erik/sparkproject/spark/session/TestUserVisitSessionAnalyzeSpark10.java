@@ -33,10 +33,15 @@ import java.util.*;
  * 3.top10 热门品类
  * 4.top10活跃session
  *
+ * 优化：
+ * 1.共享rdd 完成
+ * 2.rdd持久化 完成
+ * 3.广播大变量 未完成
+ *
  * @author Erik
  *
  */
-public class TestUserVisitSessionAnalyzeSpark09 {
+public class TestUserVisitSessionAnalyzeSpark10 {
 
     public static void main(String[] args) {
         args = new String[]{"1"};
