@@ -60,4 +60,18 @@ public class ConfigurationManager {
 		}
 		return false;		
 	}
+	/**
+	 * 获取Long类型的配置项
+	 * @param key
+	 * @return
+	 */
+	public static Long getLong(String key) {
+		String value = getProperty(key);
+		try {
+			return Long.valueOf(value);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return 0L;
+	}
 }

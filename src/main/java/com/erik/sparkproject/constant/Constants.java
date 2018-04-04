@@ -17,12 +17,16 @@ public interface Constants {
 	String JDBC_PASSWORD="jdbc.password";
 	String SPARK_LOCAL = "spark.local";
 	String SPARK_LOCAL_TASKID_SESSION = "spark.local.taskid.session";
-	
+	String SPARK_LOCAL_TASKID_PAGE = "spark.local.taskid.page";
+	String SPARK_LOCAL_TASKID_PRODUCT = "spark.local.taskid.product";
+	String KAFKA_METADATA_BROKER_LIST = "kafka.metadata.broker.list";
+	String KAFKA_TOPICS = "kafka.topics";
 	/**
 	 * spark作业相关的常量
 	 */
 	String SPARK_APP_NAME_SESSION = "UserVisitSessionAnalyzeSpark";
 	String SPARK_APP_NAME = "UserVisitSessionAnalyzeSpark_finish";
+	String SPARK_APP_NAME_PAGE = "PageOneStepConvertRateSpark";
 	String FIELD_SESSION_ID = "sessionid";
 	String FIELD_SEARCH_KEYWORDS = "searchKeywords";
 	String FIELD_CLICK_CATEGORY_IDS = "clickCategoryIds";
@@ -69,5 +73,6 @@ public interface Constants {
 	String PARAM_SEX = "sex";
 	String PARAM_KEYWORDS = "keywords";
 	String PARAM_CATEGORY_IDS = "categoryIds";
+	String PARAM_TARGET_PAGE_FLOW = "targetPageFlow";
 	
 }

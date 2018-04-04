@@ -73,9 +73,9 @@ public class SparkUtils {
 		
 		String sql = 
 				"select * "
-				+ "from user_visit_action "
-				+ "where date>='" + startDate + "' "
-				+ "and date<='" + endDate + "'";  
+				+ " from user_visit_action "
+				+ " where date>= '" + startDate + "' "
+				+ " and date<= '" + endDate + "'";
 //				+ "and session_id not in('','','')"
 		
 		DataFrame actionDF = sqlContext.sql(sql);
