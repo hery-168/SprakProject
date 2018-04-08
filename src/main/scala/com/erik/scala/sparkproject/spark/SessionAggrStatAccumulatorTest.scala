@@ -1,7 +1,8 @@
 package com.erik.scala.sparkproject.spark
 
-import com.erik.sparkproject.constant.Constants
 import com.erik.sparkproject.util.StringUtils
+import com.hyh.sparkproject.constant.Constants
+import com.hyh.sparkproject.util.StringUtils
 import org.apache.spark.AccumulatorParam
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext

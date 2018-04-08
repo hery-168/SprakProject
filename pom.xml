@@ -132,7 +132,7 @@
           <includeProjectDependencies>true</includeProjectDependencies>
           <includePluginDependencies>false</includePluginDependencies>
           <classpathScope>compile</classpathScope>
-          <mainClass>com.erik.sparkproject.App</mainClass>
+          <mainClass>com.hyh.sparkproject.App</mainClass>
         </configuration>
       </plugin>
 
