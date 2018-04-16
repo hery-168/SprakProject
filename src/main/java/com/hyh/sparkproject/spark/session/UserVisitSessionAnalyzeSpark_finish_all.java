@@ -1,49 +1,33 @@
 package com.hyh.sparkproject.spark.session;
 
 
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-
+import com.alibaba.fastjson.JSONObject;
+import com.google.common.base.Optional;
 import com.hyh.sparkproject.conf.ConfigurationManager;
 import com.hyh.sparkproject.constant.Constants;
-import com.erik.sparkproject.dao.*;
+import com.hyh.sparkproject.dao.*;
 import com.hyh.sparkproject.dao.factory.DAOFactory;
-import com.erik.sparkproject.domain.*;
 import com.hyh.sparkproject.domain.*;
 import com.hyh.sparkproject.test.MockData;
-import com.erik.sparkproject.util.*;
-import com.hyh.sparkproject.dao.*;
 import com.hyh.sparkproject.util.*;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
 import org.apache.spark.Accumulator;
 import org.apache.spark.SparkConf;
 import org.apache.spark.SparkContext;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
-import org.apache.spark.api.java.function.Function;
-import org.apache.spark.api.java.function.Function2;
-import org.apache.spark.api.java.function.PairFlatMapFunction;
-import org.apache.spark.api.java.function.PairFunction;
-import org.apache.spark.api.java.function.VoidFunction;
+import org.apache.spark.api.java.function.*;
 import org.apache.spark.broadcast.Broadcast;
 import org.apache.spark.sql.DataFrame;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SQLContext;
 import org.apache.spark.sql.hive.HiveContext;
 import org.apache.spark.storage.StorageLevel;
-
 import scala.Tuple2;
 
-import com.alibaba.fastjson.JSONObject;
-import com.google.common.base.Optional;
-import it.unimi.dsi.fastutil.ints.IntArrayList;
-import it.unimi.dsi.fastutil.ints.IntList;
+import java.util.*;
 
 
 /**

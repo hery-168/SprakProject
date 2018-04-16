@@ -38,86 +38,87 @@ import com.alibaba.fastjson.JSONObject;
  *
  */
 public class AreaTop3ProductSpark {
-	
+
+
+
 	public static void main(String[] args) {
 		// 创建SparkConf
 		SparkConf conf = new SparkConf()
 				.setAppName("AreaTop3ProductSpark");
 		SparkUtils.setMaster(conf);
-		
+
 		// 构建Spark上下文
 		JavaSparkContext sc = new JavaSparkContext(conf);
 		SQLContext sqlContext = SparkUtils.getSQLContext(sc.sc());
-//		sqlContext.setConf("spark.sql.shuffle.partitions", "1000"); 
+//		sqlContext.setConf("spark.sql.shuffle.partitions", "1000");
 //		sqlContext.setConf("spark.sql.autoBroadcastJoinThreshold", "20971520");
-		
+
 		// 注册自定义函数
-		sqlContext.udf().register("concat_long_string", 
+		sqlContext.udf().register("concat_long_string",
 				new ConcatLongStringUDF(), DataTypes.StringType);
-		sqlContext.udf().register("get_json_object", 
+		sqlContext.udf().register("get_json_object",
 				new GetJsonObjectUDF(), DataTypes.StringType);
-		sqlContext.udf().register("random_prefix", 
+		sqlContext.udf().register("random_prefix",
 				new RandomPrefixUDF(), DataTypes.StringType);
-		sqlContext.udf().register("remove_random_prefix", 
+		sqlContext.udf().register("remove_random_prefix",
 				new RemoveRandomPrefixUDF(), DataTypes.StringType);
-		sqlContext.udf().register("group_concat_distinct", 
+		sqlContext.udf().register("group_concat_distinct",
 				new GroupConcatDistinctUDAF());
-		
+
 		// 准备模拟数据
-		SparkUtils.mockData(sc, sqlContext);  
-		
+		SparkUtils.mockData(sc, sqlContext);
+
 		// 获取命令行传入的taskid，查询对应的任务参数
 		ITaskDAO taskDAO = DAOFactory.getTaskDAO();
-		
+
 		long taskid = ParamUtils.getTaskIdFromArgs(args,
 				Constants.SPARK_LOCAL_TASKID_PRODUCT);
 		Task task = taskDAO.findById(taskid);
-		
+
 		JSONObject taskParam = JSONObject.parseObject(task.getTaskParam());
 		String startDate = ParamUtils.getParam(taskParam, Constants.PARAM_START_DATE);
 		String endDate = ParamUtils.getParam(taskParam, Constants.PARAM_END_DATE);
-		
+
 		// 查询用户指定日期范围内的点击行为数据（city_id，在哪个城市发生的点击行为）
 		// 技术点1：Hive数据源的使用
 		JavaPairRDD<Long, Row> cityid2clickActionRDD = getcityid2ClickActionRDDByDate(
 				sqlContext, startDate, endDate);
-		System.out.println("cityid2clickActionRDD: " + cityid2clickActionRDD.count());  
-		
+		System.out.println("cityid2clickActionRDD: " + cityid2clickActionRDD.count());
+
 		// 从MySQL中查询城市信息
 		// 技术点2：异构数据源之MySQL的使用
 		JavaPairRDD<Long, Row> cityid2cityInfoRDD = getcityid2CityInfoRDD(sqlContext);
-		System.out.println("cityid2cityInfoRDD: " + cityid2cityInfoRDD.count());  
-		
+		System.out.println("cityid2cityInfoRDD: " + cityid2cityInfoRDD.count());
+
 		// 生成点击商品基础信息临时表
 		// 技术点3：将RDD转换为DataFrame，并注册临时表
-		generateTempClickProductBasicTable(sqlContext, 
-				cityid2clickActionRDD, cityid2cityInfoRDD); 
-		
+		generateTempClickProductBasicTable(sqlContext,
+				cityid2clickActionRDD, cityid2cityInfoRDD);
+
 		// 生成各区域各商品点击次数的临时表
 		generateTempAreaPrdocutClickCountTable(sqlContext);
-		
+
 		// 生成包含完整商品信息的各区域各商品点击次数的临时表
-		generateTempAreaFullProductClickCountTable(sqlContext);  
-		
+		generateTempAreaFullProductClickCountTable(sqlContext);
+
 		// 使用开窗函数获取各个区域内点击次数排名前3的热门商品
 		JavaRDD<Row> areaTop3ProductRDD = getAreaTop3ProductRDD(sqlContext);
-		System.out.println("areaTop3ProductRDD: " + areaTop3ProductRDD.count());  
-		
+		System.out.println("areaTop3ProductRDD: " + areaTop3ProductRDD.count());
+
 		// 这边的写入mysql和之前不太一样
 		// 因为实际上，就这个业务需求而言，计算出来的最终数据量是比较小的
 		// 总共就不到10个区域，每个区域还是top3热门商品，总共最后数据量也就是几十个
 		// 所以可以直接将数据collect()到本地
 		// 用批量插入的方式，一次性插入mysql即可
 		List<Row> rows = areaTop3ProductRDD.collect();
-		System.out.println("rows: " + rows.size());  
+		System.out.println("rows: " + rows.size());
 		persistAreaTop3Product(taskid, rows);
-		
+
 		sc.close();
 	}
-
 	/**
 	 * 查询指定日期范围内的点击行为数据
-	 * @param sqlContext 
+	 * @param sqlContext
 	 * @param startDate 起始日期
 	 * @param endDate 截止日期
 	 * @return 点击行为数据
@@ -127,22 +128,22 @@ public class AreaTop3ProductSpark {
 		// 从user_visit_action中，查询用户访问行为数据
 		// 第一个限定：click_product_id，限定为不为空的访问行为，那么就代表着点击行为
 		// 第二个限定：在用户指定的日期范围内的数据
-		
-		String sql = 
+
+		String sql =
 				"SELECT "
-					+ "city_id,"
-					+ "click_product_id product_id "
-				+ "FROM user_visit_action "
-				+ "WHERE click_product_id IS NOT NULL "			
-				+ "AND date>='" + startDate + "' "
-				+ "AND date<='" + endDate + "'";
-		
+						+ "city_id,"
+						+ "click_product_id product_id "
+						+ "FROM user_visit_action "
+						+ "WHERE click_product_id IS NOT NULL "
+						+ "AND date>='" + startDate + "' "
+						+ "AND date<='" + endDate + "'";
+
 		DataFrame clickActionDF = sqlContext.sql(sql);
-	
+
 		JavaRDD<Row> clickActionRDD = clickActionDF.javaRDD();
-	
+
 		JavaPairRDD<Long, Row> cityid2clickActionRDD = clickActionRDD.mapToPair(
-				
+
 				new PairFunction<Row, Long, Row>() {
 
 					private static final long serialVersionUID = 1L;
@@ -150,14 +151,13 @@ public class AreaTop3ProductSpark {
 					@Override
 					public Tuple2<Long, Row> call(Row row) throws Exception {
 						Long cityid = row.getLong(0);
-						return new Tuple2<Long, Row>(cityid, row);  
+						return new Tuple2<Long, Row>(cityid, row);
 					}
-					
+
 				});
-		
+
 		return cityid2clickActionRDD;
 	}
-	
 	/**
 	 * 使用Spark SQL从MySQL中查询城市信息
 	 * @param sqlContext SQLContext

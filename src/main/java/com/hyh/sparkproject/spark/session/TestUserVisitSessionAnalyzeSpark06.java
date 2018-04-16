@@ -9,7 +9,6 @@ import com.hyh.sparkproject.dao.factory.DAOFactory;
 import com.hyh.sparkproject.domain.SessionAggrStat;
 import com.hyh.sparkproject.domain.Task;
 import com.hyh.sparkproject.test.MockData;
-import com.erik.sparkproject.util.*;
 import com.hyh.sparkproject.util.*;
 import org.apache.spark.Accumulator;
 import org.apache.spark.SparkConf;

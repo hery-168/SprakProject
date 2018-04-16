@@ -20,7 +20,7 @@ import com.hyh.sparkproject.util.StringUtils;
 
 /**
  * 模拟数据程序
- * @author hery
+ * @author Administrator
  *
  */
 public class MockData {
@@ -31,63 +31,63 @@ public class MockData {
 	 * @param sqlContext
 	 */
 	public static void mock(JavaSparkContext sc,
-			SQLContext sqlContext) {
+							SQLContext sqlContext) {
 		List<Row> rows = new ArrayList<Row>();
-		
+
 		String[] searchKeywords = new String[] {"火锅", "蛋糕", "重庆辣子鸡", "重庆小面",
 				"呷哺呷哺", "新辣道鱼火锅", "国贸大厦", "太古商场", "日本料理", "温泉"};
-		
-		//生成的数据日期为当天日期，设置搜索参数时应注意搜索时间范围
 		String date = DateUtils.getTodayDate();
 		String[] actions = new String[]{"search", "click", "order", "pay"};
 		Random random = new Random();
-		
+
 		for(int i = 0; i < 100; i++) {
-			long userid = random.nextInt(100);    
-			
+			long userid = random.nextInt(100);
+
 			for(int j = 0; j < 10; j++) {
-				String sessionid = UUID.randomUUID().toString().replace("-", "");  
+				String sessionid = UUID.randomUUID().toString().replace("-", "");
 				String baseActionTime = date + " " + random.nextInt(23);
-				  
+
+				Long clickCategoryId = null;
+
 				for(int k = 0; k < random.nextInt(100); k++) {
-					long pageid = random.nextInt(10);    
-					String actionTime = baseActionTime + ":" + StringUtils.fulfuill(
-							String.valueOf(random.nextInt(59))) + ":"
-							+ StringUtils.fulfuill(String.valueOf(random.nextInt(59)));
+					long pageid = random.nextInt(10);
+					String actionTime = baseActionTime + ":" + StringUtils.fulfuill(String.valueOf(random.nextInt(59))) + ":" + StringUtils.fulfuill(String.valueOf(random.nextInt(59)));
 					String searchKeyword = null;
-					Long clickCategoryId = null;
 					Long clickProductId = null;
 					String orderCategoryIds = null;
 					String orderProductIds = null;
 					String payCategoryIds = null;
 					String payProductIds = null;
-					
+
 					String action = actions[random.nextInt(4)];
 					if("search".equals(action)) {
-						searchKeyword = searchKeywords[random.nextInt(10)];   
+						searchKeyword = searchKeywords[random.nextInt(10)];
 					} else if("click".equals(action)) {
-						clickCategoryId = Long.valueOf(String.valueOf(random.nextInt(30)));
-						clickProductId = Long.valueOf(String.valueOf(random.nextInt(100)));  
+						if(clickCategoryId == null) {
+							clickCategoryId = Long.valueOf(String.valueOf(random.nextInt(100)));
+						}
+						clickProductId = Long.valueOf(String.valueOf(random.nextInt(100)));
 					} else if("order".equals(action)) {
 						orderCategoryIds = String.valueOf(random.nextInt(100));
 						orderProductIds = String.valueOf(random.nextInt(100));
 					} else if("pay".equals(action)) {
-						payCategoryIds = String.valueOf(random.nextInt(100));  
+						payCategoryIds = String.valueOf(random.nextInt(100));
 						payProductIds = String.valueOf(random.nextInt(100));
 					}
-					
-					Row row = RowFactory.create(date, userid, sessionid, 
+
+					Row row = RowFactory.create(date, userid, sessionid,
 							pageid, actionTime, searchKeyword,
 							clickCategoryId, clickProductId,
 							orderCategoryIds, orderProductIds,
-							payCategoryIds, payProductIds);
+							payCategoryIds, payProductIds,
+							Long.valueOf(String.valueOf(random.nextInt(10))));
 					rows.add(row);
 				}
 			}
 		}
-		
+
 		JavaRDD<Row> rowsRDD = sc.parallelize(rows);
-		
+
 		StructType schema = DataTypes.createStructType(Arrays.asList(
 				DataTypes.createStructField("date", DataTypes.StringType, true),
 				DataTypes.createStructField("user_id", DataTypes.LongType, true),
@@ -100,19 +100,20 @@ public class MockData {
 				DataTypes.createStructField("order_category_ids", DataTypes.StringType, true),
 				DataTypes.createStructField("order_product_ids", DataTypes.StringType, true),
 				DataTypes.createStructField("pay_category_ids", DataTypes.StringType, true),
-				DataTypes.createStructField("pay_product_ids", DataTypes.StringType, true)));
-		
+				DataTypes.createStructField("pay_product_ids", DataTypes.StringType, true),
+				DataTypes.createStructField("city_id", DataTypes.LongType, true)));
+
 		DataFrame df = sqlContext.createDataFrame(rowsRDD, schema);
-		
-		df.registerTempTable("user_visit_action");  
+
+		df.registerTempTable("user_visit_action");
 		for(Row _row : df.take(1)) {
-			System.out.println(_row);  
+			System.out.println(_row);
 		}
-		
+
 		/**
 		 * ==================================================================
 		 */
-		
+
 		rows.clear();
 		String[] sexes = new String[]{"male", "female"};
 		for(int i = 0; i < 100; i ++) {
@@ -123,14 +124,14 @@ public class MockData {
 			String professional = "professional" + random.nextInt(100);
 			String city = "city" + random.nextInt(100);
 			String sex = sexes[random.nextInt(2)];
-			
-			Row row = RowFactory.create(userid, username, name, age, 
+
+			Row row = RowFactory.create(userid, username, name, age,
 					professional, city, sex);
 			rows.add(row);
 		}
-		
+
 		rowsRDD = sc.parallelize(rows);
-		
+
 		StructType schema2 = DataTypes.createStructType(Arrays.asList(
 				DataTypes.createStructField("user_id", DataTypes.LongType, true),
 				DataTypes.createStructField("username", DataTypes.StringType, true),
@@ -139,13 +140,43 @@ public class MockData {
 				DataTypes.createStructField("professional", DataTypes.StringType, true),
 				DataTypes.createStructField("city", DataTypes.StringType, true),
 				DataTypes.createStructField("sex", DataTypes.StringType, true)));
-		
+
 		DataFrame df2 = sqlContext.createDataFrame(rowsRDD, schema2);
 		for(Row _row : df2.take(1)) {
-			System.out.println(_row);  
+			System.out.println(_row);
 		}
-		
-		df2.registerTempTable("user_info");  
+
+		df2.registerTempTable("user_info");
+
+		/**
+		 * ==================================================================
+		 */
+		rows.clear();
+
+		int[] productStatus = new int[]{0, 1};
+
+		for(int i = 0; i < 100; i ++) {
+			long productId = i;
+			String productName = "product" + i;
+			String extendInfo = "{\"product_status\": " + productStatus[random.nextInt(2)] + "}";
+
+			Row row = RowFactory.create(productId, productName, extendInfo);
+			rows.add(row);
+		}
+
+		rowsRDD = sc.parallelize(rows);
+
+		StructType schema3 = DataTypes.createStructType(Arrays.asList(
+				DataTypes.createStructField("product_id", DataTypes.LongType, true),
+				DataTypes.createStructField("product_name", DataTypes.StringType, true),
+				DataTypes.createStructField("extend_info", DataTypes.StringType, true)));
+
+		DataFrame df3 = sqlContext.createDataFrame(rowsRDD, schema3);
+		for(Row _row : df3.take(1)) {
+			System.out.println(_row);
+		}
+
+		df3.registerTempTable("product_info");
 	}
-	
+
 }

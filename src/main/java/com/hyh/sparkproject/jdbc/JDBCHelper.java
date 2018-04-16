@@ -233,8 +233,6 @@ public class JDBCHelper {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
 		return rtn;
 	}
 		

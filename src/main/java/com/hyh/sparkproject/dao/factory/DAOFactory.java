@@ -1,7 +1,5 @@
 package com.hyh.sparkproject.dao.factory;
 
-import com.erik.sparkproject.dao.*;
-import com.erik.sparkproject.impl.*;
 import com.hyh.sparkproject.dao.*;
 import com.hyh.sparkproject.impl.*;
 
@@ -16,7 +14,6 @@ public class DAOFactory {
      */
     public static ITaskDAO getTaskDAO() {
         return new TaskDAOImpl();
-
     }
 
     /**
@@ -52,7 +49,24 @@ public class DAOFactory {
         return new AreaTop3ProductDAOImpl();
     }
 
+    public static IAdBlacklistDAO getAdBlacklistDAO() {
+        return new AdBlacklistDAOImpl();
+    }
+
+    public static IAdStatDAO getAdStatDAO() {
+        return new AdStatDAOImpl();
+    }
+
+    public static IAdUserClickCountDAO getAdUserClickCountDAO() {
+        return new AdUserClickCountDAOImpl();
+    }
+
     public static IAdProvinceTop3DAO getAdProvinceTop3DAO() {
         return new AdProvinceTop3DAOImpl();
     }
+
+    public static IAdClickTrendDAO getAdClickTrendDAO() {
+        return new AdClickTrendDAOImpl();
+    }
+
 }

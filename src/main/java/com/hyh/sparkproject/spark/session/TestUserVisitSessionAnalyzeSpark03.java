@@ -1,11 +1,11 @@
 package com.hyh.sparkproject.spark.session;
 
 
-import java.util.Iterator;
-
+import com.alibaba.fastjson.JSONObject;
 import com.hyh.sparkproject.conf.ConfigurationManager;
 import com.hyh.sparkproject.constant.Constants;
 import com.hyh.sparkproject.dao.ITaskDAO;
+import com.hyh.sparkproject.dao.factory.DAOFactory;
 import com.hyh.sparkproject.domain.Task;
 import com.hyh.sparkproject.test.MockData;
 import com.hyh.sparkproject.util.ParamUtils;
@@ -22,12 +22,9 @@ import org.apache.spark.sql.DataFrame;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SQLContext;
 import org.apache.spark.sql.hive.HiveContext;
-
-import com.alibaba.fastjson.JSONObject;
-import com.hyh.sparkproject.dao.factory.DAOFactory;
-import com.erik.sparkproject.util.*;
-
 import scala.Tuple2;
+
+import java.util.Iterator;
 
 /**
  *
