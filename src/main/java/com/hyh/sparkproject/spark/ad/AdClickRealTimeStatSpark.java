@@ -8,6 +8,7 @@ import com.hyh.sparkproject.dao.factory.DAOFactory;
 import com.hyh.sparkproject.domain.*;
 import com.hyh.sparkproject.util.DateUtils;
 import kafka.serializer.StringDecoder;
+import org.apache.hadoop.hive.ql.exec.spark.session.SparkSession;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaPairRDD;
 import org.apache.spark.api.java.JavaRDD;
@@ -796,7 +797,8 @@ public class AdClickRealTimeStatSpark {
 								DataTypes.createStructField("click_count", DataTypes.LongType, true)));  
 						
 						HiveContext sqlContext = new HiveContext(rdd.context());
-						
+
+
 						DataFrame dailyAdClickCountByProvinceDF = sqlContext.createDataFrame(rowsRDD, schema);
 						
 						// 将dailyAdClickCountByProvinceDF，注册成一张临时表
